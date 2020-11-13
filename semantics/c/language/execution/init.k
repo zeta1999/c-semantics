@@ -27,6 +27,7 @@ module C-EXECUTION-INIT
      imports SETTINGS-SYNTAX
 
      imports C-CHECK-RESTRICT-SYNTAX
+     imports C-CHECK-USE-SYNTAX
      imports C-DYNAMIC-SYNTAX
      imports C-ENV-SYNTAX
      imports C-ERROR-SYNTAX
@@ -276,5 +277,40 @@ module C-EXECUTION-INIT
           <curr-tu>TU::String</curr-tu>
 
      rule currentSemantics() => ExecutionSemantics()
+
+     syntax KItem ::= #popExpLoc()  // TODO: There's an identical one in translation.
+
+     rule
+          <k> ExpLoc(K:K, L::CabsLoc) => K ~> #popExpLoc() ... </k>
+          <curr-expression-loc> .List => ListItem(L) ...</curr-expression-loc>
+
+     rule <k> tv(...) ~> (#popExpLoc() => .K) ... </k>
+          <curr-expression-loc> ListItem(L) => .List ...</curr-expression-loc>
+     rule <k> nclv(...) ~> (#popExpLoc() => .K) ... </k>
+          <curr-expression-loc> ListItem(L) => .List ...</curr-expression-loc>
+
+     /*
+     syntax Location ::= #ExecExpLoc(K, CabsLoc)
+     rule <k> ExpLoc(K:K, L:CabsLoc) => #ExecExpLoc(K, L) ...</k>
+          <curr-program-loc> _ => L </curr-program-loc>
+     rule <k> #ExecExpLoc(V:RValue, L:CabsLoc) => V ...</k>
+          <curr-program-loc> _ => L </curr-program-loc>
+     rule <k> #ExecExpLoc(checkUse(V:RValue), L:CabsLoc) => checkUse(V) ...</k>
+          <curr-program-loc> _ => L </curr-program-loc>
+
+     syntax KItem ::= #freezerExecExpLoc(CabsLoc)
+
+     rule <k> #ExecExpLoc(K:K, L::CabsLoc) => K ~> #freezerExecExpLoc(L) ... </k>
+          <curr-program-loc> _ => L </curr-program-loc>
+          requires notBool isKResult(K)
+
+     rule <k> tv(...) ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
+          <curr-program-loc> _ => L </curr-program-loc>
+     rule <k> nclv(...) ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
+          <curr-program-loc> _ => L </curr-program-loc>
+     rule <k> voidVal ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
+          <curr-program-loc> _ => L </curr-program-loc>
+     */
+
 endmodule
 
