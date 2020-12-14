@@ -278,15 +278,17 @@ module C-EXECUTION-INIT
 
      rule currentSemantics() => ExecutionSemantics()
 
-     syntax KItem ::= #popExpLoc()  // TODO: There's an identical one in translation.
+     syntax KItem ::= #popExecExpLoc()  // TODO: There's an identical one in translation.
 
      rule
-          <k> ExpLoc(K:K, L::CabsLoc) => K ~> #popExpLoc() ... </k>
+          <k> ExpLoc(K:K, L::CabsLoc) => K ~> #popExecExpLoc() ... </k>
           <curr-expression-loc> .List => ListItem(L) ...</curr-expression-loc>
 
-     rule <k> tv(...) ~> (#popExpLoc() => .K) ... </k>
+     rule <k> tv(...) ~> (#popExecExpLoc() => .K) ... </k>
           <curr-expression-loc> ListItem(L) => .List ...</curr-expression-loc>
-     rule <k> nclv(...) ~> (#popExpLoc() => .K) ... </k>
+     rule <k> nclv(...) ~> (#popExecExpLoc() => .K) ... </k>
+          <curr-expression-loc> ListItem(L) => .List ...</curr-expression-loc>
+     rule <k> #popExecExpLoc() => .K ... </k>
           <curr-expression-loc> ListItem(L) => .List ...</curr-expression-loc>
 
      /*
