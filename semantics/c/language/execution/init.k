@@ -291,28 +291,5 @@ module C-EXECUTION-INIT
      rule <k> #popExecExpLoc() => .K ... </k>
           <curr-expression-loc> ListItem(L) => .List ...</curr-expression-loc>
 
-     /*
-     syntax Location ::= #ExecExpLoc(K, CabsLoc)
-     rule <k> ExpLoc(K:K, L:CabsLoc) => #ExecExpLoc(K, L) ...</k>
-          <curr-program-loc> _ => L </curr-program-loc>
-     rule <k> #ExecExpLoc(V:RValue, L:CabsLoc) => V ...</k>
-          <curr-program-loc> _ => L </curr-program-loc>
-     rule <k> #ExecExpLoc(checkUse(V:RValue), L:CabsLoc) => checkUse(V) ...</k>
-          <curr-program-loc> _ => L </curr-program-loc>
-
-     syntax KItem ::= #freezerExecExpLoc(CabsLoc)
-
-     rule <k> #ExecExpLoc(K:K, L::CabsLoc) => K ~> #freezerExecExpLoc(L) ... </k>
-          <curr-program-loc> _ => L </curr-program-loc>
-          requires notBool isKResult(K)
-
-     rule <k> tv(...) ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
-          <curr-program-loc> _ => L </curr-program-loc>
-     rule <k> nclv(...) ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
-          <curr-program-loc> _ => L </curr-program-loc>
-     rule <k> voidVal ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
-          <curr-program-loc> _ => L </curr-program-loc>
-     */
-
 endmodule
 
