@@ -68,7 +68,6 @@ module COMMON-SYNTAX
 
      syntax Location ::= CodeLoc(K, CabsLoc)
      syntax Location ::= ExpLoc(K, CabsLoc)
-     syntax KItem ::= leftExpLoc(CabsLoc) | rightExpLoc(CabsLoc)
 
      syntax FunctionSpecifier ::= Inline() [symbol]
      syntax NoInit ::= NoInit() [symbol]

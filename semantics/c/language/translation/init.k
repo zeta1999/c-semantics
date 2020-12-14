@@ -108,6 +108,8 @@ module C-TRANSLATION-INIT
      // TODO: Something better.
      // initializer.k
      rule figureInit(_:CId, _:Type, SingleInit(ExpLoc(K:KItem, _::CabsLoc) => K))
+     rule figureInit(_:CId, _:Type,
+               CompoundInit(list(ListItem(InitFragment(_, (ExpLoc(K:KItem, _::CabsLoc) => K))))))
 
 
      /*@ \fromStandard{\source[n1570]{\para{6.10.6}{1}}}{

@@ -128,6 +128,7 @@ module C-DECL-INITIALIZER
 
      syntax Bool ::= isCompoundStringInit(List) [function]
      rule isCompoundStringInit(ListItem(InitFragment(NextInit(), SingleInit(StringLiteral(_))))) => true
+     rule isCompoundStringInit(ListItem(InitFragment(_, SingleInit(ExpLoc(K:K, _) => K))))
      rule isCompoundStringInit(_) => false [owise]
 
      // id, type, initializer
