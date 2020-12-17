@@ -461,12 +461,13 @@ module C-ABSTRACT-REWRITING
      imports C-ABSTRACT-SYNTAX
      imports COMMON-SYNTAX
      imports FLOAT
+     imports K-EQUAL-SYNTAX
 
      rule AnonymousName() => #NoName
 
      rule DefinitionLoc(K:KItem, L::CabsLoc) => CodeLoc(K, L) [anywhere]
-     rule InitLoc(K:KItem, CabsLoc(Loc:String, _, Line:Int, _, _) #as L::CabsLoc)
-          => #if (Loc ==String "cabs loc unknown") andBool (Line ==Int -10)
+     rule InitLoc(K:KItem, CabsLoc(Loc:String, _, Line:Int, _, _) #as L::CabsLoc) =>
+          #if (Loc ==String "cabs loc unknown") andBool (Line ==Int -10)
           #then K  // TODO: something better
           #else CodeLoc(K, L)
           #fi
