@@ -462,6 +462,7 @@ module C-ABSTRACT-REWRITING
      imports COMMON-SYNTAX
      imports FLOAT
      imports K-EQUAL-SYNTAX
+     imports STRING
 
      rule AnonymousName() => #NoName
 
