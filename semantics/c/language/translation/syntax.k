@@ -465,9 +465,12 @@ module C-ABSTRACT-REWRITING
      rule AnonymousName() => #NoName
 
      rule DefinitionLoc(K:KItem, L::CabsLoc) => CodeLoc(K, L) [anywhere]
-     rule InitLoc(K:KItem, CabsLoc("cabs loc unknown", _, -10, _, _)) => K [anywhere]  // TODO: something better
-     rule InitLoc(K:KItem, CabsLoc(Loc:String, _, Line:Int, _, _) #as L::CabsLoc) => CodeLoc(K, L)
-          requires Loc =/=String "cabs loc unknown" orBool Line =/=Int -10 [anywhere]
+     rule InitLoc(K:KItem, CabsLoc(Loc:String, _, Line:Int, _, _) #as L::CabsLoc) =>
+          #if (Loc ==String "cabs loc unknown") andBool (Line ==Int -10)
+          #then K  // TODO: something better
+          #else CodeLoc(K, L)
+          #fi
+          [anywhere]
      rule StatementLoc(K:KItem, L::CabsLoc) => CodeLoc(K, L) [anywhere]
 
      rule Conditional(K1:KItem, K2:KItem, K3:KItem) => K1 ? K2 : K3 [anywhere]
