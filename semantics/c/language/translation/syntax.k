@@ -465,7 +465,7 @@ module C-ABSTRACT-REWRITING
      rule AnonymousName() => #NoName
 
      rule DefinitionLoc(K:KItem, L::CabsLoc) => CodeLoc(K, L) [anywhere]
-     rule InitLoc(K:KItem, L::CabsLoc) => .K [anywhere]
+     rule InitLoc(K:KItem, L::CabsLoc) => K [anywhere]  // TODO: something better
      rule StatementLoc(K:KItem, L::CabsLoc) => CodeLoc(K, L) [anywhere]
 
      rule Conditional(K1:KItem, K2:KItem, K3:KItem) => K1 ? K2 : K3 [anywhere]
