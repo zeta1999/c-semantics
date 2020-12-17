@@ -112,7 +112,7 @@ module C-TRANSLATION-INIT
      rule figureInit(_:CId, _:Type,
                CompoundInit(list(ListItem(InitFragment(_, (ExpLoc(K:KItem, _::CabsLoc) => K))))))
           [structural]
-     rule figureInit(_:CId, _:Type,
+     rule figureInit(_:CId, T:Type,
                CompoundInit(list(ListItem(InitFragment(_, (CodeLoc(K:KItem, _::CabsLoc) => K))))))
           requires notBool isAggregateOrUnionType(T)
           [structural]
